@@ -1,0 +1,11 @@
+# Sensitive data — never commit. Share privately.
+inputs/*.pdf
+inputs/*.csv
+voice/past-emails.md
+
+# Generated output
+out/*
+!out/.gitkeep
+
+# Keep the committed guides
+!inputs/README.md

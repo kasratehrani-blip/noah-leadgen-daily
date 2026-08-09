@@ -1,0 +1,28 @@
+# Noah daily SME leadgen — tunable settings.
+# Change the numbers here, not in MISSION.md.
+
+target_drafts: 30          # how many finished Gmail drafts to end with
+discovery_pool_min: 60     # find at least this many candidates before filtering
+
+size_band:                 # SME through lower mid-market
+  min_employees: 11
+  max_employees: 500
+
+# Restricted geos: drop any company headquartered in one of these.
+# The full geo list lives in inputs/icp.pdf. These two are called out explicitly
+# because they look in-geo but banking partners decline them right now.
+excluded_geos:
+  - Nigeria
+  - Pakistan
+
+# Fit signals, strongest first. Discovery prioritises in this order.
+priority_signals:
+  - competitor_user_expanding    # uses a Noah competitor + shows expansion intent
+  - banking_rails_applied        # applied for / announced banking rails or a licence
+  - announced_expansion          # expanding into a market Noah serves
+  - compliance_or_treasury_hire  # hiring compliance or treasury leadership
+
+run_days: weekdays
+
+# Hard safety rule. Never flip this to true. Drafts only; a human sends.
+send: false
