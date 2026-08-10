@@ -93,6 +93,11 @@ the agent to do — the summary here is so you understand what you are approving
    and **Gmail** (creates the drafts). If Gmail is not connected the run still produces the
    table and the email text, it just cannot place the drafts for you.
 
+   The **Artlist** MCP server (AI image, video, and voiceover generation) is already
+   configured at the project level — `.mcp.json` for Claude Code and `.cursor/mcp.json`
+   for Cursor point at `https://mcp.artlist.io/mcp`. On first use the editor will prompt
+   you to approve the server and complete its sign-in.
+
 ---
 
 ## Running it
@@ -165,6 +170,8 @@ Every knob lives in `config.yaml` — change it there, never in the prompt:
 ```
 noah-leadgen-daily/
   README.md                    this file
+  .mcp.json                    project MCP servers for Claude Code (Artlist)
+  .cursor/mcp.json             project MCP servers for Cursor (Artlist)
   MISSION.md                   the prompt pasted into Cursor each morning
   config.yaml                  all tunable settings
   inputs/
