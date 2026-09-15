@@ -13,7 +13,7 @@ Everything else lands in the "held" list at the end of the pack with the reason.
 """
 import csv, glob, html, json, os, re, sys, datetime
 
-FIXED_PARA = ("Noah is a global stablecoin-powered payment rail, with the ability to issue named USD, EUR "
+FIXED_PARA = ("Noah is the stablecoin infrastructure powering modern payments, with the ability to issue named USD, EUR "
               "and GBP virtual accounts in 160+ markets, and local payout in 70+ markets. We help move "
               "money worldwide faster and more cheaply than correspondent banking - powering the likes of "
               "Deel, Toptal, WorldRemit and Ledger.")

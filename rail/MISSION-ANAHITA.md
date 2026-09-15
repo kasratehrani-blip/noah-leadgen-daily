@@ -24,7 +24,8 @@ Group CEO), or the person has left or changed company, or the email domain belon
 you cannot confirm it. Never swap in a different person or a guessed address.
 
 STEP 2 - DRAFT. For each card that passed Step 1 and Step 1b, create the Gmail draft in Thijn's account: To
-exactly as printed, Subject exactly as printed (every subject contains "Noah"; do not change it), Body verbatim
+exactly as printed, Subject exactly as printed (every subject starts with "Noah"; do not change it), Body verbatim (it starts with the new fixed Noah paragraph, "Noah is the stablecoin infrastructure powering modern
+payments...")
 including BOTH placeholder lines, greeting exactly as printed, no signature, no scheduling link. The CRM,
 source and coordination lines on the card NEVER go into the draft body. If a blurb draft to the same
 To-address already exists, update it to match verbatim instead of duplicating; if Thijn has personally edited
