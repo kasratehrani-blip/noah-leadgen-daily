@@ -64,8 +64,9 @@ def subject_for(r):
 def body_for(r):
     first = r.get("ceo_first_name") or r["ceo_name"].split()[0]
     hook = r["fit_hook"].strip().rstrip(".")
+    short = r.get("short_name") or r["company"]
     return (f"Hi {first},\n{INTRO}\n{FIXED_PARA}\nWe are the missing piece for {hook}, and I'd love the "
-            f"opportunity to explore it with {r['company']}.\n{OUTRO}")
+            f"opportunity to explore it with {short}.\n{OUTRO}")
 
 
 def build(paths, pack_name, title, excluded_names, mission_md):
@@ -144,3 +145,6 @@ if __name__ == "__main__":
     a = ap.parse_args()
     ex = [l for l in open(a.exclude).read().splitlines() if l.strip()] if a.exclude else []
     build(a.results, a.name, a.title, ex, open(a.mission).read())
+
+# Render to PDF (Chromium via the globally installed Playwright):
+#   NODE_PATH=$(npm root -g) node rail/topdf.js "$PWD/out/<pack>.html" "$PWD/out/<pack>.pdf"
