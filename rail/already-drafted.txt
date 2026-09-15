@@ -1,0 +1,80 @@
+# Companies already covered by the 14 Sep CEO packs (batches 1-3 of 3), drawn from Rail's IN TALK tab.
+# One name per line. build_pack.py drops any sweep row whose company matches a line here.
+akaunt
+Aspire
+Auros
+Banco Union
+Bedford Pay
+Bilder
+Bilderlings
+Bitnob
+Bity
+Bitypreço
+Bitzaro
+BloFin
+Colibri
+ComplyRemit
+COOPERA
+CryptoMkt
+Cypher Wave Technology
+Damisa
+Digital RFQ
+Digital Treasury Services
+Digital Treasury Services LLC
+Elephants (AU) Pty Ltd
+EQX (EQ Exchange)
+FiatMatch
+Finductive
+Finmo
+FintechCashier
+Fintrax Ltd.
+Freemarket
+Genial Investimentos
+Goldten Currency Exchange
+GSX Technologies Inc
+Infinity
+Intercash
+KAST
+KIIEX
+KVB Global
+LONG TECHNOLOGY CONSULTING LIMITED
+Mercado Libre
+Moonupp LLC
+Mural Pay
+MuralPay
+Notbank
+One.io
+OpenPayd
+Openpayd
+OWNY
+PDAX
+PinnaclePay Group Limited
+Rapidz Pay
+SentBe
+SFx (Sora Financial Technologies)
+Smart Testing
+Stablegate
+String Money
+SwissBorg
+TCR
+TCR Finance
+Thrive
+Touras
+Transak
+TransBridge
+Transfermate
+Transfero Swiss AG
+TREZORA - DEFIMINDS SAS
+TrustLinq
+Validat Limited
+Wallbit
+Wirex
+Xpate
+xpate
+Xtransfer
+XTransfer
+Yeepay
+Yellow Card
+Yuzera
+Zero Gravity
+Zeux HK Limited
