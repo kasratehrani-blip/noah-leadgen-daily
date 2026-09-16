@@ -33,13 +33,13 @@ def yes(v):
     return str(v).strip().lower() in ("yes", "true", "1", "y")
 
 
-def qualifies(r, excluded):
+def qualifies(r, excluded, require_ceo=True):
     reasons = []
     if (r.get("company") or r.get("input_name") or "").strip().lower() in excluded:
         reasons.append("already drafted in an earlier pack")
     if (r.get("hubspot_status") or "").upper() != "NET_NEW":
         reasons.append(f"HubSpot: {r.get('hubspot_status')} - {r.get('hubspot_evidence')}")
-    if not yes(r.get("is_ceo")):
+    if require_ceo and not yes(r.get("is_ceo")):
         reasons.append(f"contact is not CEO (title: {r.get('ceo_title')})")
     if not yes(r.get("ceo_current")):
         reasons.append("CEO not confirmed current at this company")
@@ -69,12 +69,12 @@ def body_for(r):
             f"opportunity to explore it with {short}.\n{OUTRO}")
 
 
-def build(paths, pack_name, title, excluded_names, mission_md):
+def build(paths, pack_name, title, excluded_names, mission_md, require_ceo=True, crm_label="NET-NEW"):
     rows = sorted(load(paths), key=lambda r: int(r.get("live_row") or 0))
     excluded = {n.strip().lower() for n in excluded_names}
     go, held = [], []
     for r in rows:
-        why = qualifies(r, excluded)
+        why = qualifies(r, excluded, require_ceo)
         (held if why else go).append((r, why))
     today = datetime.date.today().strftime("%d %b %Y")
     esc = html.escape
@@ -87,9 +87,9 @@ def build(paths, pack_name, title, excluded_names, mission_md):
 <h2>{i:02d} {esc(r['company'])}</h2>
 <p class="meta"><b>To:</b> {esc(r['ceo_email'])} &nbsp;·&nbsp; <b>pre-check domain:</b> {esc(r['domain'])}<br>
 <b>Subject:</b> {esc(subj)}<br>
-<b>Contact:</b> {esc(r['ceo_name'])}, {esc(r['ceo_title'])} (CEO title verified {today}: {esc(str(r.get('ceo_evidence') or ''))})<br>
-<b>CRM STATUS:</b> NET-NEW &nbsp;·&nbsp; <b>HUBSPOT (verified {today}):</b> {esc(str(r.get('hubspot_evidence') or 'no record'))}<br>
-<b>Source:</b> Rail LIVE client list row {esc(str(r.get('live_row')))} &nbsp;·&nbsp; <b>Company:</b> {esc(str(r.get('description') or ''))}
+<b>Contact:</b> {esc(r['ceo_name'])}, {esc(r['ceo_title'])} (title re-verified {today}: {esc(str(r.get('ceo_evidence') or ''))})<br>
+<b>CRM STATUS:</b> {esc(crm_label)} &nbsp;·&nbsp; <b>HUBSPOT (verified {today}):</b> {esc(str(r.get('hubspot_evidence') or 'No contact, no company'))}<br>
+<b>Source:</b> {esc(str(r.get('source') or ('Rail LIVE client list row ' + str(r.get('live_row')))))}{(' &nbsp;·&nbsp; <b>Company:</b> ' + esc(str(r.get('description')))) if r.get('description') else ''}
 {('<br><b>Flags:</b> ' + esc(str(r.get('flags')))) if r.get('flags') else ''}</p>
 <p class="lbl">DRAFT BODY (verbatim, nothing above this line goes in the email):</p>
 <pre>{esc(body)}</pre>
@@ -107,7 +107,7 @@ pre{{white-space:pre-wrap;font-family:Helvetica,Arial,sans-serif;font-size:10.5p
 .held{{page-break-before:always}} li{{margin-bottom:4px;font-size:9.5pt}}
 </style></head><body>
 <h1>{esc(title)}</h1>
-<p class="sub">Generated {today} from Rail's LIVE client list, swept live: Noah HubSpot (company by name and domain, contact by domain and by email), CEO title (Apollo + web, per person), email (Apollo). Sender: Thijn Lamers. CEOs only. Net-new only.</p>
+<p class="sub">Generated {today}, re-verified live: contact title (Apollo, per person) and HubSpot (contact by email, company by domain, deals by company). Sender: Thijn Lamers. Net-new only.</p>
 <div class="mission">{esc(mission_md)}</div>
 {''.join(cards)}
 <section class="held"><h2>NOT IN THIS PACK - swept out, for Kasra to confirm (do not draft any of these)</h2><ul>{held_html}</ul></section>
@@ -142,9 +142,11 @@ if __name__ == "__main__":
     ap.add_argument("--title", required=True)
     ap.add_argument("--mission", required=True, help="markdown/text file with the MISSION FOR CLAUDE block")
     ap.add_argument("--exclude", default="", help="file with one already-drafted company name per line")
+    ap.add_argument("--any-title", action="store_true", help="contacts pack: do not require the CEO title")
+    ap.add_argument("--crm-label", default="NET-NEW")
     a = ap.parse_args()
     ex = [l for l in open(a.exclude).read().splitlines() if l.strip()] if a.exclude else []
-    build(a.results, a.name, a.title, ex, open(a.mission).read())
+    build(a.results, a.name, a.title, ex, open(a.mission).read(), require_ceo=not a.any_title, crm_label=a.crm_label)
 
 # Render to PDF (Chromium via the globally installed Playwright):
 #   NODE_PATH=$(npm root -g) node rail/topdf.js "$PWD/out/<pack>.html" "$PWD/out/<pack>.pdf"
