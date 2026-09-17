@@ -2,7 +2,9 @@ Thijn's Gmail Drafts only. Nothing is sent. HubSpot is not needed for this job.
 
 Find every Noah draft that still has a <<Thijn will insert intro here>> or <<Thijn will insert outro here>> line. Update each one in place. Do not touch any draft without those lines.
 
-For each draft, keep To, Subject, the "Hi <First>," line and the "We are the missing piece for ..." line exactly as they are. Then:
+For each draft, keep To, the "Hi <First>," line and the "We are the missing piece for ..." line exactly as they are. Then:
+
+0. Subject: put "Re: " in front of the existing subject, so "Noah for your members abroad" becomes "Re: Noah for your members abroad". Do not add it twice. Change nothing else in the subject.
 
 1. Replace the <<Thijn will insert intro here>> line with:
 I hope you are doing well. My name is Thijn Lamers, co-founder of Noah and before that part of the founding team at Adyen. It would be great if we could schedule a call, even 15 minutes, to explore how we could work together and help each other.
