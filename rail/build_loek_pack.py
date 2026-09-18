@@ -2,7 +2,7 @@
 """Loek-format CEO outreach pack (12 Sep 2026 layout) from sweep results JSON.
 Usage: build_loek_pack.py <results.json...> --name <pack> --date "18 Sep 2026" [--exclude names.txt]"""
 import json, sys, argparse, html, re, csv
-ap = argparse.ArgumentParser(); ap.add_argument('results', nargs='+'); ap.add_argument('--name', required=True); ap.add_argument('--date', required=True); ap.add_argument('--exclude', default=''); ap.add_argument('--rows', default='', help='comma list of live_row to include as cards'); ap.add_argument('--batch', default=''); ap.add_argument('--closeout-only', action='store_true'); ap.add_argument('--no-closeout', action='store_true')
+ap = argparse.ArgumentParser(); ap.add_argument('results', nargs='+'); ap.add_argument('--name', required=True); ap.add_argument('--date', required=True); ap.add_argument('--exclude', default=''); ap.add_argument('--rows', default='', help='comma list of live_row to include as cards'); ap.add_argument('--batch', default=''); ap.add_argument('--closeout-only', action='store_true'); ap.add_argument('--no-closeout', action='store_true'); ap.add_argument('--any-title', action='store_true', help='accept second-in-line contacts (is_ceo false)'); ap.add_argument('--title', default='')
 a = ap.parse_args()
 FIXED = ("Noah is the stablecoin infrastructure powering modern payments, with the ability to issue named USD, EUR and GBP virtual accounts in 160+ markets, and local payout in 70+ markets. "
          "We help move money worldwide faster and more cheaply than correspondent banking - powering the likes of Deel, Toptal, WorldRemit and Ledger.")
@@ -21,7 +21,7 @@ def qualifies(r):
     why = []
     if (r.get('company') or r.get('input_name') or '').lower() in excl: why.append('already drafted')
     if (s(r.get('hubspot_status')) or '').upper() != 'NET_NEW': why.append('HubSpot: ' + s(r.get('hubspot_status')) + ' - ' + s(r.get('hubspot_evidence'))[:220])
-    if not yes(r.get('is_ceo')): why.append('not CEO (title: ' + s(r.get('ceo_title')) + ')')
+    if not yes(r.get('is_ceo')) and not a.any_title: why.append('not CEO (title: ' + s(r.get('ceo_title')) + ')')
     if not yes(r.get('ceo_current')): why.append('CEO not confirmed current')
     if not r.get('ceo_email'): why.append('no verified email')
     elif not s(r.get('email_status')).lower().startswith(('verified', 'likely')): why.append('email status ' + s(r.get('email_status')))
@@ -55,7 +55,7 @@ h2{font-size:12pt;margin:16px 0 8px;color:#1F3864;border-bottom:2px solid #1F386
 .foot{font-size:8.5pt;color:#777;margin-top:14px}</style>'''
 bt = f' - Batch {a.batch}' if a.batch else ''
 H = f'''<!doctype html><html><head><meta charset="utf-8"><title>Noah CEO Outreach Pack - Loek{bt} - {a.date}</title>{CSS}</head><body>
-<div class="top"><h1>Noah · CEO Outreach Pack · Loek de Jager{bt}</h1><p class="sub">{a.date} · {len(go)} Gmail drafts · Source: Noah lead-pool book (8 Sep 2026) · HubSpot-clean, current CEO, Apollo-verified mailbox on the company's own domain · Drafts only, nothing sends</p></div>
+<div class="top"><h1>Noah · {a.title or 'CEO Outreach Pack'} · Loek de Jager{bt}</h1><p class="sub">{a.date} · {len(go)} Gmail drafts · Source: Noah lead-pool book (8 Sep 2026) · HubSpot-clean, {'current CEO' if not a.any_title else 'current decision-maker (CEO where one exists, else the second in line)'}, Apollo-verified mailbox on the company's own domain · Drafts only, nothing sends</p></div>
 <div class="box"><b>How to use.</b> Open a Claude session with Loek's Gmail connector, upload this PDF and say: "Create these as Gmail drafts, follow the instructions in the file." Review in Gmail Drafts. Send only what you choose, yourself.</div>
 <div class="box"><b>Instructions for the Claude session this file is uploaded to</b><br>
 <b>Step 0, mailbox.</b> Confirm the connected Gmail account is loek.dejager@noah.com. If it is any other mailbox, stop and report.<br>
