@@ -35,8 +35,8 @@ h3{font-size:10.5pt;margin:12px 0 4px;color:#1F3864} .sub{color:#555;margin:0 0 
 table{border-collapse:collapse;width:100%;margin:4px 0 10px;font-size:8.6pt;table-layout:fixed}
 th{background:#1F3864;color:#fff;text-align:left;padding:3px 5px;font-size:8.6pt} td{border-bottom:1px solid #ddd;padding:3px 5px;vertical-align:top;word-wrap:break-word}
 tr{page-break-inside:avoid} .kpi{display:flex;gap:10px;margin:10px 0 12px} .kpi div{flex:1;background:#f4f6fb;border:1px solid #cfd6e6;padding:10px 12px;border-radius:4px;font-size:9.5pt}
-.kpi b{font-size:22pt;display:block;color:#1F3864} .a{background:#FFF2CC} .g{background:#E2F0D9} .pb{page-break-before:always} p{margin:0 0 7px}
-.cover{font-size:10.5pt} .cover p{margin:0 0 9px} .cover li{margin:0 0 5px} .method td{font-size:9pt;background:#fafbfd} .meta{color:#555;font-size:9.5pt;margin-bottom:14px}
+.kpi b{font-size:19pt;display:block;color:#1F3864} .a{background:#FFF2CC} .g{background:#E2F0D9} .pb{page-break-before:always} p{margin:0 0 7px}
+.cover{font-size:10pt} .cover p{margin:0 0 7px} .cover li{margin:0 0 5px} .method td{font-size:8.6pt;background:#fafbfd} .meta{color:#555;font-size:9.5pt;margin-bottom:14px}
 .legend span{display:inline-block;padding:1px 8px;margin-right:8px;border:1px solid #ccc}</style>'''
 h = f'''<!doctype html><html><head><meta charset="utf-8"><title>Stablecon attendees ranked for Noah</title>{CSS}</head><body>
 <div class="cover">
