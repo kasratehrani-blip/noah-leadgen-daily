@@ -6,7 +6,7 @@ ap = argparse.ArgumentParser(); ap.add_argument('results', nargs='+'); ap.add_ar
 a = ap.parse_args()
 FIXED = ("Noah is the stablecoin infrastructure powering modern payments, with the ability to issue named USD, EUR and GBP virtual accounts in 160+ markets, and local payout in 70+ markets. "
          "We help move money worldwide faster and more cheaply than correspondent banking - powering the likes of Deel, Toptal, WorldRemit and Ledger.")
-SIG = "[Loek's Gmail signature - per STEP 1; fallback: Loek de Jager]"
+SIG = "[Loek's Gmail signature - per STEP 1]"
 def yes(v): return str(v).strip().lower() in ('true', 'yes', '1')
 rows = []
 for p in a.results:
@@ -50,7 +50,7 @@ H = f'''<!doctype html><html><head><meta charset="utf-8"><title>Noah CEO Outreac
 <div class="hdr">CEO Outreach Pack - Loek de Jager - {len(go)} Gmail Drafts · Generated {a.date} · sender: Loek de Jager, Noah · Source: Noah lead-pool book (Kasra, 8 Sep 2026), the {len(rows)} companies not covered by the 12 Sep pack. Every card passed: HubSpot sweep (company by name and domain, contact by domain and by email; any record = suppressed), current-CEO check, Apollo-verified mailbox on the company's own domain. Suppressed and held cards are listed on the close-out page.</div>
 <div class="box"><b>HOW TO USE (Loek, or whoever runs it)</b><br>1. Open a Claude session with the Gmail connector. 2. Upload this PDF: "Create these as Gmail drafts - follow the instructions in the file." 3. Review in Gmail Drafts. 4. Send only what you choose, yourself. Nothing sends automatically, ever.</div>
 <div class="box"><b>INSTRUCTIONS FOR THE CLAUDE SESSION THIS FILE IS UPLOADED TO</b><br>
-STEP 1 - SIGNATURE: retrieve Loek's Gmail signature (send-as settings, else copy verbatim from a recent SENT email) and use it in place of the bracketed signature line in every draft. If none is found, use the plain name "Loek de Jager" and report it.<br>
+STEP 1 - SIGNATURE: every draft must end with Loek's real Gmail signature: the Noah logo, then "Loek de Jager", "Business Development", a rule, "Mobile: +31 6 42221575", "Email: loek.dejager@noah.com", "Address: 4th Floor, 205 Regent Street, London, England, W1B 4HB", then the links "Connect on LinkedIn" and "Schedule a call". Take it from Gmail send-as settings (HTML, with the logo image); if the API cannot reach it, copy the signature block verbatim from Loek's most recent SENT email, logo included. Put it where the bracketed line is. Never a plain-text name only: if you cannot reproduce the signature with the logo, stop and report before creating drafts.<br>
 STEP 2 - HUBSPOT: for each card, search HubSpot CONTACT by the To-address and by the person's name, and COMPANY by the domain and the name. Any record for THIS PERSON, or a deal for THIS COMPANY, = HOLD that card and report the record URL. HubSpot is read-only.<br>
 STEP 3 - CREATE: one Gmail DRAFT per remaining card, To / Subject / Body exactly as printed (with the Step-1 signature). Never send.<br>
 STEP 4 - MATCH CHECK: list the drafts back; confirm each To equals the card address, the body company matches the recipient, the greeting matches the mailbox owner.<br>
